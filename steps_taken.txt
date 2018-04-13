@@ -1,4 +1,4 @@
-Hi!  The purpose of this exercise is to teach users to do basic computer vision in Python.
+Hi!  As mentioned, the purpose of this exercise is to teach users to do basic computer vision in Python.
 
 First things first, I needed our program to recognize text from an image.  We needed to recognize score for our NN to work.
 
