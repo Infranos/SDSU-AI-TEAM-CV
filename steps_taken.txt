@@ -1,0 +1,50 @@
+First things first, I needed our program to recognize text from an image.  We needed to recognize score for our NN to work.
+
+I started with Selenium, ran the program, retrieved the score using PIL and OpenCV, and utilized pytesseract.
+It was atrocious.  Firstly, 8's were shutdown as 0s.  6's could be G's.  5's were S's.  2's were z's!
+I did all sorts of operations.  Preprocessing, image enlargening, image-smallering?
+Making the image smaller actually helped pytesseract, but I still had too much error for comfort.
+
+As such, I wanted to do custom character recognition for greater accuracy.  Problem was,
+google's dino game uses a tricky and rather specific font that I couldn't identify, even after extensive 
+searching.
+
+So I embarked on a font hunt, and ended up finding their sprite sheet here:
+https://github.com/wayou/t-rex-runner/blob/gh-pages/assets/offline-sprite-2x.png
+
+Not exactly what I wanted, but it was good enough to work with!
+From here, I needed to extract only the digits.
+
+The first couple of lines in opencv/PIL program do just that.
+After which, all I did was some basic pre-processing and contour application to grab the templates for our digits.
+
+Hah.  Okay I say basic but it would have been tons harder without Adrian Rosebrock's beautiful tutorials:
+https://www.pyimagesearch.com/2017/07/17/credit-card-ocr-with-opencv-and-python/
+
+
+Basically, contour-ing grabs the outlines of the digits, then we apply boxing and stuff to get the full digit.
+
+After grabbing our digit templates, we grab the region of the screen where the score appears,
+pre-process it, apply contours again, and check which template best matches an individual number in our score.
+(And yes, we could have done all this to the high-score image instead.  It would not be as cool though..)
+
+But Kablam, a FAR superior accuracy to PyTesseract!
+
+
+
+Okay, so we've gotten a reliable means of tracking the score.
+That leaves actual object detection.  Cacti don't dodge themselves.
+
+Using our screenshot, we grab a still-background image for our regular frame.  Preferrably the region
+right of our 'saur.  More pre-processing.
+
+Next step, we compare a current frame with our first, then apply contours and filling to track the moving
+object.  You can actually do this later with a camera if you prefer!  Definitely check out:
+https://www.pyimagesearch.com/2015/05/25/basic-motion-detection-and-tracking-with-python-and-opencv/
+
+
+
+Recap:
+By the end of this exercise, we learned how to apply contours to recognize digits, match objects, and
+detect basic motion.  We have experience in detecting objects on screens, applying pre-processing, and 
+hopefully, we gained a thing or two with tools like OpenCV, PIL, imutils, and Selenium.
