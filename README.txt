@@ -7,7 +7,7 @@ In here, you'll find:
 	Our main program
 
 -custom_ocr.py
-	For our demo
+	For our demo; tracks the score
 
 -motion_detector.py
 	The code we have to edit.
