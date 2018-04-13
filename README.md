@@ -1,1 +1,0 @@
-# SDSU-AI-TEAM-CV
