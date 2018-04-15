@@ -22,7 +22,7 @@ def grab_still_background(screenshot_img):
 	#You'll want to grab a small box area just right of our t-rex, instead of the whole thing
 	#To get a decent still background-image, avoid capturing the ground
 	################################################################################################
-	background = screenshot.crop((295, 120, 390, 162))
+	background = screenshot.crop((int(w * 0.2933), int(h * 0.2013), int(w * 0.3846), int(h * 0.2718)))
 	################################################################################################
 	background.save("first_frame.png")
 	
@@ -46,7 +46,7 @@ def should_jump(screenshot_img, first_frame, verbose = False):
 	#Edit below line:
 	#Same as the still background's set
 	################################################################################################
-	roi = screenshot.crop((295, 120, 390, 162)) 
+	roi = screenshot.crop((int(w * 0.2933), int(h * 0.2013), int(w * 0.3846), int(h * 0.2718)))
 	################################################################################################
 	roi.save("current_frame.png")
 
