@@ -21,6 +21,4 @@ In here, you'll find:
 	Just a quick overview of our methodology/reasoning
 	
 	
-For this particular exercise, it should be noted that I have not scaled grabbed images to be independent of one's screen resolution.  
-This time, you'll have to edit the numerical values for screen-saving by hand; but fret not, for I shall have it corrected for round 2.  
 Stay tuned for our neural network workshop!
