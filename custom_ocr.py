@@ -23,7 +23,7 @@ def create_ocr_template(sprite_sheet_img = "offline-sprite-2x.png", verbose = Fa
 	sprite_sheet = Image.open(sprite_sheet_img)
 	w = sprite_sheet.size[0]
 	h = sprite_sheet.size[1]
-	digit_set = sprite_sheet.crop((950, 0, w - 1210, h - 105))
+	digit_set = sprite_sheet.crop((int(w * 0.3952), 0, int(w * 0.4967), int(h * 0.1923)))
 	digit_set.save("digit_set.png")
 
 #=======================================================================================================
@@ -67,7 +67,7 @@ def determine_score(screenshot, digit_templates, verbose = False):
 	overall_img = Image.open(screenshot)
 	w = overall_img.size[0]
 	h = overall_img.size[1]
-	dino_score_img = overall_img.crop((w - 300, 30, w - 220, h - 520))
+	dino_score_img = overall_img.crop((int(w * 0.7115), int(h * 0.0503), int(w * 0.7885), int(h * 0.1275)))
 	dino_score_img.save("score_img.png")
 
 	#Pre-process our score image to be properly read in OpenCV
