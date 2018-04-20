@@ -20,7 +20,8 @@ From here, I needed to extract only the digits.
 The first couple of lines in the program do just that.
 After which, all I did was some basic pre-processing and contour application to grab the templates for our digits.
 
-Hah.  Okay I say basic but it would have been tons harder without Adrian Rosebrock's beautiful tutorials.  If you'd like to try your hand at auto number/text detection, check out their link below:
+Hah.  Okay I say basic but it would have been tons harder without Adrian Rosebrock's beautiful tutorials.  
+If you'd like to try your hand at auto number/text detection, check out their link below:
 https://www.pyimagesearch.com/2017/07/17/credit-card-ocr-with-opencv-and-python/
 
 
