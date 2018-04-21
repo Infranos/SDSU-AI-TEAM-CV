@@ -35,10 +35,10 @@ def grab_still_background(screenshot_img, increment = 0, verbose = False):
 	return first_frame
 	
 #=======================================================================================================
+#A modified "should_jump".
+#This variant returns the rough contour area instead of guiding the program to jump or not.
 
-def should_jump(screenshot_img, first_frame, increment = 0, verbose = False):
-
-	object_present = False
+def retrieve_contourArea(screenshot_img, first_frame, increment = 0, verbose = False):
 
 	#Grabs the area just after T-rex
 	screenshot = Image.open(screenshot_img)
@@ -72,15 +72,10 @@ def should_jump(screenshot_img, first_frame, increment = 0, verbose = False):
 	_, contours, _ = cv2.findContours(processed_img.copy(), cv2.RETR_EXTERNAL,
 		cv2.CHAIN_APPROX_SIMPLE)
 
-	#Determines whether or not an object is present:
 	for contour in contours:
 		if verbose:
-			print("Con: {}".format(cv2.contourArea(contour)))
+			print("Contour: {}".format(cv2.contourArea(contour)))
 		
-		#Helps us ignore false positives and weak matches
-		if cv2.contourArea(contour) < 25:
-			object_present = False
-		else:
-			object_present = True
+		return cv2.contourArea(contour)
 
-	return object_present
+	return 0

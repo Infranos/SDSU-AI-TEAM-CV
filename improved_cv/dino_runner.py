@@ -13,7 +13,7 @@ from custom_ocr import create_ocr_template
 from custom_ocr import determine_score
 
 from motion_detector import grab_still_background
-from motion_detector import should_jump
+from motion_detector import retrieve_contourArea
 
 
 def runner():
@@ -30,10 +30,10 @@ def runner():
 
 		#Ensure everything's loaded; pre-set variables
 		time.sleep(1)
-		marathon_end = False
+		score = 0
 		old_score = 0
-		timer_can_start = True
 		high_score = 0
+		timer_can_start = True
 		default_increment = 0
 		increment = default_increment
 		restart_permitted = True
@@ -47,7 +47,7 @@ def runner():
 		first_frame = grab_still_background(screenshot, True)
 
 		#Now as long as we don't crash..: 
-		while not marathon_end:
+		while score <  700:
 			driver.save_screenshot(screenshot)
 			
 			#Our custom OCR for score detection:
@@ -65,18 +65,13 @@ def runner():
 					increment = int(score / 100) + default_increment
 					print("New increment: {}".format(increment))
 
-			if score >= 700:
-				print("Objective complete!")
-				marathon_end = True
-				driver.close()
-
 			#Motion detection for object dodging
-			object_present = should_jump(screenshot, first_frame, increment, True)
-
-			if object_present:
+			contour_area = retrieve_contourArea(screenshot, first_frame, increment, True)
+			if contour_area > 25:
 				jump.perform()
 				
-			print(score)
+
+			print("Score: {}".format(score))
 
 
 			#Basically, if the score is the same for multiple passes, run a timer:
@@ -88,16 +83,16 @@ def runner():
 					#If the time passed exceeds two seconds, we've crashed our dino
 					elapsed = time.time() - start
 					if elapsed > 2:
-						#marathon_end = True #Commenting this out will allow the marathon to continue
 						if score > high_score:
 							high_score = score
 						timer_can_start = True
 						jump.perform()
-					print(elapsed)
+					print("Time Elapsed: {}".format(elapsed))
 			else:
 				old_score = score
 				timer_can_start = True
 				
+		print("Score of 700 reached!  Closing..")
 		driver.close()
 
 	except WebDriverException:
