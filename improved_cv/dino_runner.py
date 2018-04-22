@@ -36,7 +36,6 @@ def runner():
 		timer_can_start = True
 		default_increment = 0
 		increment = default_increment
-		restart_permitted = True
 
 		#Our beautiful custom OCR templates
 		digit_templates = create_ocr_template('offline-sprite-2x.png')
